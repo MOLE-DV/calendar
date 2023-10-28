@@ -1,0 +1,147 @@
+*{margin: 0; box-sizing: border-box; overflow-x: hidden; font-family: Arial, Helvetica, sans-serif;}
+
+#container{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar{
+    background-color: rgb(227, 227, 227);
+    width: .5vw;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: rgb(102, 102, 102);
+}
+
+#table{
+    width: 100vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.091);
+}
+
+:root{
+    --scale: calc(9.5vh + 9.5vw);
+}
+
+#row{
+    display: flex;
+    width: 100vw;
+    height: fit-content;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#box{
+    width: calc((100vw / 7) - (3 * calc(.05vh + .05vw)));
+    height: var(--scale);
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(1vh + 1vw);
+    transition: .1s;
+    margin: calc(.05vh + .05vw);
+    background-color: rgb(243, 243, 243);
+    color: black;
+    float: left;
+    transition: .2s;
+}
+
+#box_n{
+    width: calc((100vw / 7) - (3 * calc(.05vh + .05vw)));
+    height: var(--scale);
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(1vh + 1vw);
+    transition: .1s;
+    margin: calc(.05vh + .05vw);
+    background-color: #FF8484;
+    color: white;
+    float: left;
+    transition: .2s;
+}
+
+#loading{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(gif/Loading_icon.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: calc(2vh + 2vw);
+    z-index: 9999999;
+}
+
+
+#box:hover{
+    border: calc(.1vh + .1vw) solid black;
+}
+
+
+#boxes{
+    display: inline-block;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+
+#top{
+    position: fixed;
+    transition: .5s;
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(66, 159, 253);
+    color: white;
+}
+
+#top #box{
+    font-size: calc(.8vh + .8vw);
+    height: calc(2vh + 2vw);
+    background: none;
+    color: white;
+}
+
+
+#top #panel{
+    width: 100vw;
+    height: calc(2vh + 2vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(1vh + 1vw);
+    transition: .5s;
+}
+
+#top #days{
+    justify-content: space-between;
+    padding: calc(.1vh + .1vw);
+    display: flex;
+}
+
+#empty{
+    height: calc(4vh + 4vw);
+    width: 100vw;
+    background-color: white;
+}
+
+
+#year{
+    display: block;
+}
+
+#storages{
+    position: absolute;
+}
