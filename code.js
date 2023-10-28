@@ -21,6 +21,7 @@ let dark_clr = '#F6F6F6';
 
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log('Loading calendar...');
+    console.log(dat.getMonth())
     instance_calendar();
     console.log('Calendar Loaded!')
     document.getElementById('loading').remove();
@@ -32,6 +33,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 
+setInterval(update, 1000)
+
+function update(){
+    dat = new Date();
+    let time = [dat.getHours(), dat.getMinutes(), dat.getSeconds()];
+    for(i = 0; i < time.length; i++){
+        switch(time[i]<10){
+            case true:
+                time[i] = ('0' + time[i].toString());
+                break;
+        }
+    }
+    document.getElementById('hour').innerHTML = time[0] + ':' + time[1] + ':' + time[2];
+}
+
+
 let start = 6
 let year = dat.getFullYear();
 let day = 0;
@@ -41,7 +58,7 @@ let row_height = 0;
 
 function instance_calendar(){
 
-    for(y = 0; y<1; y++){
+    for(y = 0; y<8; y++){
         for(m = 0; m < 12; m++){
             for(d = 0; d < months[Object.keys(months)[m]]; d++){
                 let dy_box;
@@ -58,6 +75,13 @@ function instance_calendar(){
                 if(day % 7 == 0){
                     dy_box.setAttribute('id','box_n');
                 }
+
+                switch(year + y == dat.getFullYear() && m == dat.getMonth() && d == dat.getDate()-1){
+                    case true:
+                        dy_box.setAttribute('id', 'box_t');
+                        break;
+                }
+
                 row_height = dy_box.clientHeight;
                 day++;
             }
@@ -110,59 +134,73 @@ function scrl(){
     let panel = document.getElementById('panel');
     let scroll = boxes.scrollTop;
     let minus = parseInt(window.innerHeight/5);
-    console.log(minus);
+    let last_year = readable_yr_index;
+    let last_month = 0;
 
     if(scroll > parseInt(month_storage[at_mn_index] - minus)){
         at_mn_index++;
         readable_mn_index++;
+        last_month = readable_mn_index-1;
+
+
         if(readable_mn_index > 11) {
             readable_mn_index = 0;
             at_yr_index++;
             readable_yr_index++;
+            last_year = readable_yr_index-1;
+            last_month = 11;
         };
-        document.querySelectorAll('.c' + readable_yr_index + '_' + parseInt(readable_mn_index-1)).forEach(element => {
+
+
+        document.querySelectorAll('.c' +  last_year + '_' + last_month).forEach(element => {
             switch(element.getAttribute('id')){
                 case 'box_n': break;
-                default: element.style.backgroundColor = 'rgb(243, 243, 243)'; 
+                case 'box_t': break;
+                default: element.style = ''; 
             }
         });
         document.querySelectorAll('.c' + readable_yr_index + '_' + readable_mn_index).forEach(element => {
             switch(element.getAttribute('id')){
                 case 'box_n': break;
-                default: element.style.backgroundColor = 'white'; 
+                case 'box_t': break;
+                default: element.style.backgroundColor = 'white'; element.style.color = 'black';
             }
         });
+
     }
     else if(month_storage[at_mn_index-1] && scroll < parseInt(month_storage[at_mn_index-1] - minus)){
         at_mn_index--;
         readable_mn_index--;
-        if(readable_mn_index > 11) {
+        last_month = readable_mn_index+1;
+
+        if(readable_mn_index < 0) {
             readable_mn_index = 11;
             at_yr_index--;
             readable_yr_index--;
+            last_year = readable_yr_index+1;
+            last_month = 0;
         };
-        document.querySelectorAll('.c' + readable_yr_index + '_' + parseInt(readable_mn_index + 1)).forEach(element => {
+
+
+        document.querySelectorAll('.c' + last_year + '_' + last_month).forEach(element => {
             switch(element.getAttribute('id')){
                 case 'box_n': break;
-                default: element.style.backgroundColor = 'rgb(243, 243, 243)'; 
+                case 'box_t': break;
+                default: element.style = ''; 
             }
         });
         document.querySelectorAll('.c' + readable_yr_index + '_' + readable_mn_index).forEach(element => {
             switch(element.getAttribute('id')){
                 case 'box_n': break;
-                default: element.style.backgroundColor = 'white'; 
+                case 'box_t': break;
+                default: element.style.backgroundColor = 'white'; element.style.color = 'black';
             }
         });
-    }
 
+
+
+    }
     panel.innerHTML = Object.keys(months)[readable_mn_index] + ' ' + (readable_yr_index);
 }
 
 
-
-addEventListener('keydown', (e)=>{
-    if(e.key = 'e'){
-        console.log(at_index);
-        console.log(row_height)
-    }
-})

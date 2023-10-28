@@ -1,4 +1,4 @@
-*{margin: 0; box-sizing: border-box; overflow-x: hidden; font-family: Arial, Helvetica, sans-serif;}
+*{margin: 0; box-sizing: border-box; overflow-x: hidden; font-family: Arial, Helvetica, sans-serif; user-select: none;}
 
 #container{
     width: 100vw;
@@ -22,7 +22,7 @@
 }
 
 :root{
-    --scale: calc(9.5vh + 9.5vw);
+    --scale: calc(5vh + 5vw);
 }
 
 #row{
@@ -33,7 +33,7 @@
     overflow: hidden;
 }
 
-#box{
+#box, #box_n, #box_t{
     width: calc((100vw / 7) - (3 * calc(.05vh + .05vw)));
     height: var(--scale);
     overflow: visible;
@@ -41,28 +41,21 @@
     justify-content: center;
     align-items: center;
     font-size: calc(1vh + 1vw);
-    transition: .1s;
     margin: calc(.05vh + .05vw);
-    background-color: rgb(243, 243, 243);
-    color: black;
+    background-color: rgb(36, 36, 36);
+    color: rgb(255, 255, 255);
     float: left;
     transition: .2s;
 }
 
+#box_t{
+    background-color: rgb(80, 153, 255);
+    color: white;
+}
+
 #box_n{
-    width: calc((100vw / 7) - (3 * calc(.05vh + .05vw)));
-    height: var(--scale);
-    overflow: visible;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: calc(1vh + 1vw);
-    transition: .1s;
-    margin: calc(.05vh + .05vw);
     background-color: #FF8484;
     color: white;
-    float: left;
-    transition: .2s;
 }
 
 #loading{
@@ -84,7 +77,7 @@
 
 
 #box:hover{
-    border: calc(.1vh + .1vw) solid black;
+    border: calc(.2vh + .2vw) dashed rgb(255, 20, 20);
 }
 
 
@@ -114,6 +107,15 @@
     color: white;
 }
 
+#top #hour{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    right: calc(1vh + 1vw);
+    top: calc(.5vh + .5vw);
+    padding: calc(.5vh + .5vw);
+    border-radius: calc(.1vh + .1vw);
+    background-color: rgb(36, 36, 36);
+}
 
 #top #panel{
     width: 100vw;
